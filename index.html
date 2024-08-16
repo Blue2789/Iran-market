@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ایران مارکت</title>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css" />
+    <link
+      rel="stylesheet"
+      href="assets/fonts/bootstrap-icon/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="assets/plugin/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/plugin/timer/timer.css" />
+    <link rel="stylesheet" href="assets/plugin/hint-css/hint-css.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+      .category {
+        font-size: 1.2rem;
+        margin: 0;
+        padding: 10px 0;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+      }
+
+      .category:hover {
+        border-bottom: 2px solid #ff5722;
+      }
+      .menu-item {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0.5rem 0;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .bg-light {
+        background-color: #f8f9fa;
+      }
+
+      .container-fluid.bg-light {
+        border-bottom: 1px solid #ddd;
+      }
+      .container-fluid {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .row.text-center {
+        justify-content: center;
+      }
+
+      #suggestionsContainer {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      #searchButton {
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      #searchButton img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .dropdown-item img {
+        margin-left: 8px;
+      }
+      .dropdown-item {
+        padding: 8px 16px;
+      }
+
+      .dropdown-menu {
+        text-align: right;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      .dropdown-item:hover {
+        background-color: #f8f9fa;
+      }
+
+      #cartDropdown .dropdown-menu {
+        right: 10px;
+        left: auto;
+        transform: translateX(-20%);
+        width: 300px;
+      }
+
+      .card {
+        margin-bottom: 15px;
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: 288px;
+        object-fit: cover;
+      }
+
+      .carousel {
+        width: 80%;
+        margin: 0 auto;
+      }
+
+      .carousel-item img {
+        width: 100%;
+        height: auto;
+        border: 2px solid #ddd;
+        border-radius: 0.375rem;
+      }
+
+      .discount-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .discount-container img {
+        max-width: 80%;
+        height: auto;
+        border: 2px solid #ddd;
+        border-radius: 0.375rem;
+      }
+
+      .align-one {
+        position: absolute;
+        right: 78rem;
+        top: 138%;
+      }
+      .align-two {
+        position: absolute;
+        right: 78rem;
+        top: 84%;
+      }
+      .item {
+        display: block;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        width: 13%;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .items-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding-left: 10px;
+      }
+
+      .item {
+        display: block;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        width: 13%;
+        text-align: center;
+      }
+
+      .item-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .item-details {
+        text-align: center;
+      }
+
+      .item-title {
+        font-size: 16px;
+        margin: 0 0 10px 0;
+      }
+
+      .item-prices {
+        display: block;
+        font-size: 14px;
+      }
+
+      .item-original-price {
+        display: block;
+        text-decoration: line-through;
+        color: #999;
+        margin-bottom: 5px;
+      }
+
+      .item-discounted-price {
+        display: block;
+        color: red;
+      }
+      .takhfif {
+        left: -5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid p-3">
+      <div class="row align-items-center">
+        <div class="col-md-2">
+          <img
+            src="assets/images/logo.png"
+            alt="ایران مارکت"
+            class="img-fluid"
+          />
+        </div>
+
+        <div class="col-md-6 text-center position-relative">
+          <div class="input-group">
+            <input
+              type="text"
+              id="searchInput"
+              class="form-control"
+              placeholder="جستجوی محصول"
+            />
+            <div class="input-group-append">
+              <button class="btn" id="searchButton" type="button">
+                <img src="assets/images/search.png" alt="سرچ" />
+              </button>
+            </div>
+          </div>
+
+          <div id="suggestionsContainer">
+            <div id="searchSuggestions">
+              <div class="d-flex justify-content-center">
+                <img
+                  src="assets/images/bag.png"
+                  alt="کیف ضد آب"
+                  class="img-thumbnail mx-1"
+                  style="width: 100px"
+                />
+                <img
+                  src="assets/images/bag.png"
+                  alt="کیف ضد آب"
+                  class="img-thumbnail mx-1"
+                  style="width: 100px"
+                />
+                <img
+                  src="assets/images/bag.png"
+                  alt="کیف ضد آب"
+                  class="img-thumbnail mx-1"
+                  style="width: 100px"
+                />
+              </div>
+
+              <div class="mt-2 text-center">
+                <a href="#" class="btn btn-link">کیف زنانه</a>
+                <a href="#" class="btn btn-link">کیف سبک</a>
+                <a href="#" class="btn btn-link">کیف زیبا</a>
+              </div>
+            </div>
+
+            <div id="recentSearches" class="mt-3 text-center text-bg-danger">
+              <span>جستجوهای اخیر: </span>
+              <span class="badge badge-secondary mx-1">آیفون</span>
+              <span class="badge badge-secondary mx-1">تلویزیون</span>
+              <span class="badge badge-secondary mx-1">شیائومی</span>
+              <span class="badge badge-secondary mx-1">کفش اسپرت</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 text-md-start">
+          <div class="dropdown d-inline-block">
+            <button
+              class="btn btn-light dropdown-toggle"
+              type="button"
+              id="userDropdown"
+            >
+              <img
+                src="assets/images/user.png"
+                alt="ورود | ثبت نام"
+                class="img-fluid"
+                style="width: 30px"
+              />
+              ورود | ثبت نام
+            </button>
+            <div class="dropdown-menu" aria-labelledby="userDropdown">
+              <div class="text-center p-2">
+                <img
+                  src="assets/images/userNotImage.png"
+                  alt="کاربر"
+                  class="img-fluid mb-2"
+                  style="width: 50px"
+                />
+                <div class="dropdown-divider"></div>
+              </div>
+              <a class="dropdown-item" href="#">
+                سفارش‌ها
+                <img
+                  src="assets/images/package.png"
+                  alt="سفارش‌ها"
+                  class="img-fluid"
+                  style="width: 20px"
+                />
+              </a>
+              <a class="dropdown-item" href="#">
+                علاقمندی‌ها
+                <img
+                  src="assets/images/heart.png"
+                  alt="علاقمندی‌ها"
+                  class="img-fluid"
+                  style="width: 20px"
+                />
+              </a>
+              <a class="dropdown-item" href="#">
+                خروج از حساب کاربری
+                <img
+                  src="assets/images/exit.png"
+                  alt="خروج از حساب کاربری"
+                  class="img-fluid"
+                  style="width: 20px"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div class="dropdown d-inline-block mr-3">
+            <button
+              class="btn btn-light dropdown-toggle"
+              type="button"
+              id="cartDropdown"
+            >
+              <img
+                src="assets/images/shopping-cart.png"
+                alt="سبد خرید"
+                class="img-fluid"
+                style="width: 30px"
+              />
+              سبد خرید
+            </button>
+            <div class="dropdown-menu" aria-labelledby="cartDropdown">
+              <div class="p-2" style="min-width: 300px">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <span>کوله پشتی مدل ایستاده</span>
+                    <div class="text-muted" style="font-size: 0.9em">
+                      ۷۰۰ هزار تومان
+                    </div>
+                  </div>
+                  <button class="btn btn-sm btn-danger">&times;</button>
+                </div>
+                <div class="dropdown-divider"></div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <span>کوله پشتی مدل ایستاده</span>
+                    <div class="text-muted" style="font-size: 0.9em">
+                      ۷۰۰ هزار تومان
+                    </div>
+                  </div>
+                  <button class="btn btn-sm btn-danger">&times;</button>
+                </div>
+                <div class="dropdown-divider"></div>
+
+                <div
+                  class="d-flex justify-content-between align-items-center mt-2"
+                >
+                  <strong>مجموع:</strong>
+                  <strong>۱,۴۰۰,۰۰۰ تومان</strong>
+                </div>
+                <button class="btn btn-primary btn-block mt-2">پرداخت</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid bg-light py-2">
+      <div class="row text-center">
+        <div class="col">
+          <h6 class="menu-item">صفحه اصلی</h6>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="clothingDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            پوشاک <span class="dropdown-arrow"></span>
+          </h6>
+          <ul class="dropdown-menu" aria-labelledby="clothingDropdown">
+            <li><a class="dropdown-item" href="#">مردانه</a></li>
+            <li><a class="dropdown-item" href="#">زنانه</a></li>
+            <li><a class="dropdown-item" href="#">بچگانه</a></li>
+          </ul>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="digitalGoodsDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            کالای دیجیتال
+          </h6>
+          <ul class="dropdown-menu" aria-labelledby="digitalGoodsDropdown">
+            <li><a class="dropdown-item" href="#">لپ تاپ و کامپیوتر</a></li>
+            <li><a class="dropdown-item" href="#">موبایل</a></li>
+            <li><a class="dropdown-item" href="#">تبلت</a></li>
+            <li><a class="dropdown-item" href="#">وسایل جانبی</a></li>
+          </ul>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="homeAppliancesDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            لوازم خانگی
+          </h6>
+          <ul class="dropdown-menu" aria-labelledby="homeAppliancesDropdown">
+            <li><a class="dropdown-item" href="#">یخچال و فریزر</a></li>
+            <li><a class="dropdown-item" href="#">ماشین لباسشویی</a></li>
+            <li><a class="dropdown-item" href="#">ماشین ظرف شویی</a></li>
+            <li><a class="dropdown-item" href="#">اجاق گاز</a></li>
+            <li><a class="dropdown-item" href="#">هود و سینک</a></li>
+          </ul>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="beautyDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            زیبایی
+          </h6>
+          <ul class="dropdown-menu" aria-labelledby="beautyDropdown">
+            <li><a class="dropdown-item" href="#">لوازم آرایشی</a></li>
+            <li><a class="dropdown-item" href="#">عطر و ادکلن</a></li>
+            <li><a class="dropdown-item" href="#">لوازم بهداشتی</a></li>
+          </ul>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="electricalAppliancesDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            لوازم برقی
+          </h6>
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="electricalAppliancesDropdown"
+          >
+            <li><a class="dropdown-item" href="#">سشوار</a></li>
+            <li><a class="dropdown-item" href="#">اتو</a></li>
+            <li><a class="dropdown-item" href="#">ریش تراش</a></li>
+            <li><a class="dropdown-item" href="#">ساعت دیجیتال</a></li>
+            <li><a class="dropdown-item" href="#">هم زن و آبمیوه گیر</a></li>
+            <li>
+              <a class="dropdown-item" href="#">ترازو دیجیتال و چرخ کن</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="supermarketDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            سوپر مارکت
+          </h6>
+          <ul class="dropdown-menu" aria-labelledby="supermarketDropdown">
+            <li><a class="dropdown-item" href="#">صبحانه</a></li>
+            <li><a class="dropdown-item" href="#">تنقلات</a></li>
+            <li><a class="dropdown-item" href="#">خشکبار</a></li>
+            <li><a class="dropdown-item" href="#">حبوبات و کنسرو</a></li>
+            <li><a class="dropdown-item" href="#">میوه و سبزیجات</a></li>
+            <li><a class="dropdown-item" href="#">سوسیس و کالباس</a></li>
+            <li><a class="dropdown-item" href="#">گوشت</a></li>
+            <li><a class="dropdown-item" href="#">لبنیات</a></li>
+          </ul>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="kidsAndBabyDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            کودک و نوزاد
+          </h6>
+          <ul class="dropdown-menu" aria-labelledby="kidsAndBabyDropdown">
+            <li><a class="dropdown-item" href="#">پوشک</a></li>
+            <li><a class="dropdown-item" href="#">بهداشت و حمام</a></li>
+            <li><a class="dropdown-item" href="#">سرگرمی و غذاخوری</a></li>
+            <li><a class="dropdown-item" href="#">کالای خواب</a></li>
+          </ul>
+        </div>
+
+        <div class="col dropdown">
+          <h6
+            class="menu-item dropdown-toggle"
+            id="pagesDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            صفحات
+          </h6>
+          <ul class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <li><a class="dropdown-item" href="#">بلاگ</a></li>
+            <li><a class="dropdown-item" href="#">سبد خرید</a></li>
+            <li><a class="dropdown-item" href="#">تسویه حساب</a></li>
+            <li><a class="dropdown-item" href="#">ورود</a></li>
+            <li><a class="dropdown-item" href="#">پروفایل</a></li>
+            <li><a class="dropdown-item" href="#">جستجو محصول</a></li>
+            <li><a class="dropdown-item" href="#">صفحه محصول</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="carouselExampleControls" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="assets/images/1.jpg" class="d-block w-100" alt="تصویر 1" />
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/2.jpg" class="d-block w-100" alt="تصویر 2" />
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/3.gif" class="d-block w-100" alt="تصویر 3" />
+        </div>
+        <div class="carousel-item">
+          <img src="assets/images/4.jpg" class="d-block w-100" alt="تصویر 4" />
+        </div>
+      </div>
+      <a
+        class="carousel-control-prev"
+        href="#carouselExampleControls"
+        role="button"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#carouselExampleControls"
+        role="button"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+      </a>
+    </div>
+    <div class="discount-container mt-4">
+      <img src="assets/images/5.jpg" alt="60% Off" class="img-fluid" />
+    </div>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-6 text-right">
+          <h4
+            style="
+              display: inline-block;
+              position: relative;
+              padding-bottom: 10px;
+            "
+          >
+            اخرین پیشنهاد ها
+            <span
+              style="
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 2px;
+                background-color: red;
+              "
+            ></span>
+          </h4>
+        </div>
+        <div class="col-6"></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-4">
+          <img
+            src="assets/images/tablets.png"
+            class="img-fluid"
+            alt="تبلت"
+            style="
+              height: 288px;
+              object-fit: cover;
+              border: 2px solid #ddd;
+              border-radius: 0.375rem;
+            "
+          />
+        </div>
+
+        <div class="col-md-8">
+          <div
+            id="latestOffersCarousel"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="row no-gutters">
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        لپ تاپ لنوو مدل Le740 s plus مخصوص گیم
+                      </h5>
+                      <p class="card-text">
+                        <span
+                          class="text-muted"
+                          style="text-decoration: line-through"
+                          >۲۷,۶۰۰,۰۰۰ تومان</span
+                        >
+                        <strong class="text-danger">۲۴,۴۰۰,۰۰۰ تومان</strong>
+                      </p>
+                      <ul class="list-unstyled">
+                        <li><span>&#10003;</span> طراحی زیبا</li>
+                        <li><span>&#10003;</span> حافظه SSD</li>
+                        <li><span>&#10003;</span> کارت گرافیک قدرتمند</li>
+                        <li><span>&#10003;</span> صفحه نمایش لمسی</li>
+                      </ul>
+                      <p class="text-danger text-right">۸ ساعت مانده</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <img
+                      src="assets/images/LAPTOP.PNG"
+                      class="card-img-top"
+                      alt="لپ تاپ"
+                      style="height: 300px; object-fit: contain"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row no-gutters">
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        لپ تاپ لنوو مدل Le740 s plus مخصوص گیم
+                      </h5>
+                      <p class="card-text">
+                        <span
+                          class="text-muted"
+                          style="text-decoration: line-through"
+                          >۲۷,۶۰۰,۰۰۰ تومان</span
+                        >
+                        <strong class="text-danger">۲۴,۴۰۰,۰۰۰ تومان</strong>
+                      </p>
+                      <ul class="list-unstyled">
+                        <li><span>&#10003;</span> طراحی زیبا</li>
+                        <li><span>&#10003;</span> حافظه SSD</li>
+                        <li><span>&#10003;</span> کارت گرافیک قدرتمند</li>
+                        <li><span>&#10003;</span> صفحه نمایش لمسی</li>
+                      </ul>
+                      <p class="text-danger text-right">۸ ساعت مانده</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <img
+                      src="assets/images/LAPTOP.PNG"
+                      class="card-img-top"
+                      alt="لپ تاپ"
+                      style="height: 300px; object-fit: contain"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="row no-gutters">
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        لپ تاپ لنوو مدل Le740 s plus مخصوص گیم
+                      </h5>
+                      <p class="card-text">
+                        <span
+                          class="text-muted"
+                          style="text-decoration: line-through"
+                          >۲۷,۶۰۰,۰۰۰ تومان</span
+                        >
+                        <strong class="text-danger">۲۴,۴۰۰,۰۰۰ تومان</strong>
+                      </p>
+                      <ul class="list-unstyled">
+                        <li><span>&#10003;</span> طراحی زیبا</li>
+                        <li><span>&#10003;</span> حافظه SSD</li>
+                        <li><span>&#10003;</span> کارت گرافیک قدرتمند</li>
+                        <li><span>&#10003;</span> صفحه نمایش لمسی</li>
+                      </ul>
+                      <p class="text-danger text-right">۸ ساعت مانده</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <img
+                      src="assets/images/LAPTOP.PNG"
+                      class="card-img-top"
+                      alt="لپ تاپ"
+                      style="height: 300px; object-fit: contain"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#latestOffersCarousel"
+              role="button"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only"></span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#latestOffersCarousel"
+              role="button"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 text-right">
+      <h4
+        class="takhfif"
+        style="display: inline-block; position: relative; padding-bottom: 10px"
+      >
+        پرتخفیف ترین ها
+        <span
+          style="
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: red;
+          "
+        ></span>
+      </h4>
+    </div>
+    <div class="col-6"></div>
+    <div class="items-container">
+      <div class="item">
+        <img
+          src="assets/images/Honormthree.jpg"
+          class="item-image"
+          alt="گوشی شیائومی m11"
+        />
+        <div class="item-details">
+          <div class="item-title">گوشی شیائومی m11</div>
+          <div class="item-prices">
+            <span class="item-original-price">1,350,000 تومان</span>
+            <span class="item-discounted-price">1,200,000 تومان</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <img
+          src="assets/images/Watch.jpg"
+          class="item-image"
+          alt="اپل واچ مدل m32"
+        />
+        <div class="item-details">
+          <div class="item-title">اپل واچ مدل m32</div>
+          <div class="item-prices">
+            <span class="item-original-price">2,140,000 تومان</span>
+            <span class="item-discounted-price">1,135,000 تومان</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <img
+          src="assets/images/Shave.jpg"
+          class="item-image"
+          alt="ریش تراش دایاک"
+        />
+        <div class="item-details">
+          <div class="item-title">ریش تراش دایاک</div>
+          <div class="item-prices">
+            <span class="item-original-price">1,350,000 تومان</span>
+            <span class="item-discounted-price">732,000 تومان</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <img
+          src="assets/images/TV.jpg"
+          class="item-image"
+          alt="تلویزیون 40 اینچ"
+        />
+        <div class="item-details">
+          <div class="item-title">تلویزیون 40 اینچ</div>
+          <div class="item-prices">
+            <span class="item-original-price">7,800,000 تومان</span>
+            <span class="item-discounted-price">1,350,000 تومان</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <img
+          src="assets/images/sweater.jpg"
+          class="item-image"
+          alt="کاپشن زمستانه"
+        />
+        <div class="item-details">
+          <div class="item-title">کاپشن زمستانه</div>
+          <div class="item-prices">
+            <span class="item-original-price">1,350,000 تومان</span>
+            <span class="item-discounted-price">750,000 تومان</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="item">
+        <img
+          src="assets/images/Earbud.jpg"
+          class="item-image"
+          alt="هنذفری بلوتوثی شیائومی"
+        />
+        <div class="item-details">
+          <div class="item-title">هنذفری بلوتوثی شیائومی</div>
+          <div class="item-prices">
+            <span class="item-original-price">730,000 تومان</span>
+            <span class="item-discounted-price">630,000 تومان</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="amazing">
+      <div class="container-fluid">
+        <div class="swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide">
+              <div
+                class="d-flex justify-content-center align-items-center flex-column"
+              >
+                <img
+                  src="assets/images/amazingv2.png"
+                  class="img-fluid"
+                  width="150"
+                  alt=""
+                />
+                <a href="#" class="mt-2 text-white">
+                  مشاهده بیشتر <i class="fa fa-chevron-left"></i>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-box-item bg-white">
+                <div class="hover">
+                  <div class="hover-btn">
+                    <a href="#" class="hint--right" data-hint="مقایسه محصول">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="hint--right"
+                      data-hint="افزودن به علاقه مندی"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="hint--right" data-hint="مشاهده سریع">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                  <div class="hover-color">
+                    <span
+                      style="background-color: green"
+                      class="hint--left"
+                      data-hint="رنگ سبز"
+                    ></span>
+                    <span
+                      style="background-color: red"
+                      class="hint--left"
+                      data-hint="رنگ قرمز"
+                    ></span>
+                    <span
+                      style="background-color: #fff"
+                      class="hint--left"
+                      data-hint="رنگ سفید"
+                    ></span>
+                  </div>
+                </div>
+                <a href="">
+                  <div class="image text-center">
+                    <img
+                      src="assets/images/amazing/watch-1.jpg"
+                      class="img-fluid one-image"
+                      alt=""
+                    />
+                    <img
+                      src="assets/images/amazing/watch-2.jpg"
+                      class="img-fluid two-image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="desc">
+                    <div class="title">
+                      <h6 class="title-fa">ساعت هوشمند</h6>
+                      <h6 class="title-en text-muted">Samsung Galaxy Watch</h6>
+                      <div class="progress mt-3">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 50%"
+                          aria-valuenow="50"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="my-2">
+                        <span class="fw-bold me-1">50%</span>
+                        <span class="text-muted font-12">فروش رفته</span>
+                      </div>
+                    </div>
+                    <div
+                      class="foot d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <div
+                          class="add hint--left"
+                          data-hint="افزودن به سبد خرید"
+                        >
+                          <i class="fal fa-shopping-basket"></i>
+                        </div>
+                      </div>
+                      <div class="price flex-column justify-content-end">
+                        <div>
+                          <span class="font-18 fw-bold">200.000</span>
+                        </div>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span
+                            class="text-muted font-14 text-decoration-line-through"
+                            >400.000</span
+                          >
+                          <span class="text-muted font-14 ms-2">تومان</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timer text-center">
+                      <div
+                        class="countdown"
+                        data-date="2025-03-07"
+                        data-time="19:30"
+                      ></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-box-item bg-white">
+                <div class="hover">
+                  <div class="hover-btn">
+                    <a href="#" class="hint--right" data-hint="مقایسه محصول">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="hint--right"
+                      data-hint="افزودن به علاقه مندی"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="hint--right" data-hint="مشاهده سریع">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                  <div class="hover-color">
+                    <span
+                      style="background-color: green"
+                      class="hint--left"
+                      data-hint="رنگ سبز"
+                    ></span>
+                    <span
+                      style="background-color: red"
+                      class="hint--left"
+                      data-hint="رنگ قرمز"
+                    ></span>
+                    <span
+                      style="background-color: #fff"
+                      class="hint--left"
+                      data-hint="رنگ سفید"
+                    ></span>
+                  </div>
+                </div>
+                <a href="">
+                  <div class="image text-center">
+                    <img
+                      src="assets/images/amazing/watch-3.jpg"
+                      class="img-fluid one-image"
+                      alt=""
+                    />
+                    <img
+                      src="assets/images/amazing/watch-1.jpg"
+                      class="img-fluid two-image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="desc">
+                    <div class="title">
+                      <h6 class="title-fa">ساعت هوشمند</h6>
+                      <h6 class="title-en text-muted">Samsung Galaxy Watch</h6>
+                      <div class="progress mt-3">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 50%"
+                          aria-valuenow="50"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="my-2">
+                        <span class="fw-bold me-1">50%</span>
+                        <span class="text-muted font-12">فروش رفته</span>
+                      </div>
+                    </div>
+                    <div
+                      class="foot d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <div
+                          class="add hint--left"
+                          data-hint="افزودن به سبد خرید"
+                        >
+                          <i class="fal fa-shopping-basket"></i>
+                        </div>
+                      </div>
+                      <div class="price flex-column justify-content-end">
+                        <div>
+                          <span class="font-18 fw-bold">200.000</span>
+                        </div>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span
+                            class="text-muted font-14 text-decoration-line-through"
+                            >400.000</span
+                          >
+                          <span class="text-muted font-14 ms-2">تومان</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timer text-center">
+                      <div
+                        class="countdown"
+                        data-date="2025-03-07"
+                        data-time="19:30"
+                      ></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-box-item bg-white">
+                <div class="hover">
+                  <div class="hover-btn">
+                    <a href="#" class="hint--right" data-hint="مقایسه محصول">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="hint--right"
+                      data-hint="افزودن به علاقه مندی"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="hint--right" data-hint="مشاهده سریع">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                  <div class="hover-color">
+                    <span
+                      style="background-color: green"
+                      class="hint--left"
+                      data-hint="رنگ سبز"
+                    ></span>
+                    <span
+                      style="background-color: red"
+                      class="hint--left"
+                      data-hint="رنگ قرمز"
+                    ></span>
+                    <span
+                      style="background-color: #fff"
+                      class="hint--left"
+                      data-hint="رنگ سفید"
+                    ></span>
+                  </div>
+                </div>
+                <a href="">
+                  <div class="image text-center">
+                    <img
+                      src="assets/images/amazing/watch-1.jpg"
+                      class="img-fluid one-image"
+                      alt=""
+                    />
+                    <img
+                      src="assets/images/amazing/watch-2.jpg"
+                      class="img-fluid two-image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="desc">
+                    <div class="title">
+                      <h6 class="title-fa">ساعت هوشمند</h6>
+                      <h6 class="title-en text-muted">Samsung Galaxy Watch</h6>
+                      <div class="progress mt-3">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 50%"
+                          aria-valuenow="50"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="my-2">
+                        <span class="fw-bold me-1">50%</span>
+                        <span class="text-muted font-12">فروش رفته</span>
+                      </div>
+                    </div>
+                    <div
+                      class="foot d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <div
+                          class="add hint--left"
+                          data-hint="افزودن به سبد خرید"
+                        >
+                          <i class="fal fa-shopping-basket"></i>
+                        </div>
+                      </div>
+                      <div class="price flex-column justify-content-end">
+                        <div>
+                          <span class="font-18 fw-bold">200.000</span>
+                        </div>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span
+                            class="text-muted font-14 text-decoration-line-through"
+                            >400.000</span
+                          >
+                          <span class="text-muted font-14 ms-2">تومان</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timer text-center">
+                      <div
+                        class="countdown"
+                        data-date="2025-03-07"
+                        data-time="19:30"
+                      ></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-box-item bg-white">
+                <div class="hover">
+                  <div class="hover-btn">
+                    <a href="#" class="hint--right" data-hint="مقایسه محصول">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="hint--right"
+                      data-hint="افزودن به علاقه مندی"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="hint--right" data-hint="مشاهده سریع">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                  <div class="hover-color">
+                    <span
+                      style="background-color: green"
+                      class="hint--left"
+                      data-hint="رنگ سبز"
+                    ></span>
+                    <span
+                      style="background-color: red"
+                      class="hint--left"
+                      data-hint="رنگ قرمز"
+                    ></span>
+                    <span
+                      style="background-color: #fff"
+                      class="hint--left"
+                      data-hint="رنگ سفید"
+                    ></span>
+                  </div>
+                </div>
+                <a href="">
+                  <div class="image text-center">
+                    <img
+                      src="assets/images/amazing/watch-1.jpg"
+                      class="img-fluid one-image"
+                      alt=""
+                    />
+                    <img
+                      src="assets/images/amazing/watch-4.jpg"
+                      class="img-fluid two-image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="desc">
+                    <div class="title">
+                      <h6 class="title-fa">ساعت هوشمند</h6>
+                      <h6 class="title-en text-muted">Samsung Galaxy Watch</h6>
+                      <div class="progress mt-3">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 50%"
+                          aria-valuenow="50"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="my-2">
+                        <span class="fw-bold me-1">50%</span>
+                        <span class="text-muted font-12">فروش رفته</span>
+                      </div>
+                    </div>
+                    <div
+                      class="foot d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <div
+                          class="add hint--left"
+                          data-hint="افزودن به سبد خرید"
+                        >
+                          <i class="fal fa-shopping-basket"></i>
+                        </div>
+                      </div>
+                      <div class="price flex-column justify-content-end">
+                        <div>
+                          <span class="font-18 fw-bold">200.000</span>
+                        </div>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span
+                            class="text-muted font-14 text-decoration-line-through"
+                            >400.000</span
+                          >
+                          <span class="text-muted font-14 ms-2">تومان</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timer text-center">
+                      <div
+                        class="countdown"
+                        data-date="2025-03-07"
+                        data-time="19:30"
+                      ></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-box-item bg-white">
+                <div class="hover">
+                  <div class="hover-btn">
+                    <a href="#" class="hint--right" data-hint="مقایسه محصول">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="hint--right"
+                      data-hint="افزودن به علاقه مندی"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="hint--right" data-hint="مشاهده سریع">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                  <div class="hover-color">
+                    <span
+                      style="background-color: green"
+                      class="hint--left"
+                      data-hint="رنگ سبز"
+                    ></span>
+                    <span
+                      style="background-color: red"
+                      class="hint--left"
+                      data-hint="رنگ قرمز"
+                    ></span>
+                    <span
+                      style="background-color: #fff"
+                      class="hint--left"
+                      data-hint="رنگ سفید"
+                    ></span>
+                  </div>
+                </div>
+                <a href="">
+                  <div class="image text-center">
+                    <img
+                      src="assets/images/amazing/watch-3.jpg"
+                      class="img-fluid one-image"
+                      alt=""
+                    />
+                    <img
+                      src="assets/images/amazing/watch-4.jpg"
+                      class="img-fluid two-image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="desc">
+                    <div class="title">
+                      <h6 class="title-fa">ساعت هوشمند</h6>
+                      <h6 class="title-en text-muted">Samsung Galaxy Watch</h6>
+                      <div class="progress mt-3">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 50%"
+                          aria-valuenow="50"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="my-2">
+                        <span class="fw-bold me-1">50%</span>
+                        <span class="text-muted font-12">فروش رفته</span>
+                      </div>
+                    </div>
+                    <div
+                      class="foot d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <div
+                          class="add hint--left"
+                          data-hint="افزودن به سبد خرید"
+                        >
+                          <i class="fal fa-shopping-basket"></i>
+                        </div>
+                      </div>
+                      <div class="price flex-column justify-content-end">
+                        <div>
+                          <span class="font-18 fw-bold">200.000</span>
+                        </div>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span
+                            class="text-muted font-14 text-decoration-line-through"
+                            >400.000</span
+                          >
+                          <span class="text-muted font-14 ms-2">تومان</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timer text-center">
+                      <div
+                        class="countdown"
+                        data-date="2025-03-07"
+                        data-time="19:30"
+                      ></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-box-item bg-white">
+                <div class="hover">
+                  <div class="hover-btn">
+                    <a href="#" class="hint--right" data-hint="مقایسه محصول">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="hint--right"
+                      data-hint="افزودن به علاقه مندی"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="hint--right" data-hint="مشاهده سریع">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                  <div class="hover-color">
+                    <span
+                      style="background-color: green"
+                      class="hint--left"
+                      data-hint="رنگ سبز"
+                    ></span>
+                    <span
+                      style="background-color: red"
+                      class="hint--left"
+                      data-hint="رنگ قرمز"
+                    ></span>
+                    <span
+                      style="background-color: #fff"
+                      class="hint--left"
+                      data-hint="رنگ سفید"
+                    ></span>
+                  </div>
+                </div>
+                <a href="">
+                  <div class="image text-center">
+                    <img
+                      src="assets/images/amazing/watch-1.jpg"
+                      class="img-fluid one-image"
+                      alt=""
+                    />
+                    <img
+                      src="assets/images/amazing/watch-2.jpg"
+                      class="img-fluid two-image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="desc">
+                    <div class="title">
+                      <h6 class="title-fa">ساعت هوشمند</h6>
+                      <h6 class="title-en text-muted">Samsung Galaxy Watch</h6>
+                      <div class="progress mt-3">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 50%"
+                          aria-valuenow="50"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="my-2">
+                        <span class="fw-bold me-1">50%</span>
+                        <span class="text-muted font-12">فروش رفته</span>
+                      </div>
+                    </div>
+                    <div
+                      class="foot d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <div
+                          class="add hint--left"
+                          data-hint="افزودن به سبد خرید"
+                        >
+                          <i class="fal fa-shopping-basket"></i>
+                        </div>
+                      </div>
+                      <div class="price flex-column justify-content-end">
+                        <div>
+                          <span class="font-18 fw-bold">200.000</span>
+                        </div>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span
+                            class="text-muted font-14 text-decoration-line-through"
+                            >400.000</span
+                          >
+                          <span class="text-muted font-14 ms-2">تومان</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timer text-center">
+                      <div
+                        class="countdown"
+                        data-date="2025-03-07"
+                        data-time="19:30"
+                      ></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="product-box-item bg-white">
+                <div class="hover">
+                  <div class="hover-btn">
+                    <a href="#" class="hint--right" data-hint="مقایسه محصول">
+                      <i class="bi bi-arrow-left-right"></i>
+                    </a>
+                    <a
+                      href="#"
+                      class="hint--right"
+                      data-hint="افزودن به علاقه مندی"
+                    >
+                      <i class="bi bi-heart"></i>
+                    </a>
+                    <a href="#" class="hint--right" data-hint="مشاهده سریع">
+                      <i class="bi bi-eye"></i>
+                    </a>
+                  </div>
+                  <div class="hover-color">
+                    <span
+                      style="background-color: green"
+                      class="hint--left"
+                      data-hint="رنگ سبز"
+                    ></span>
+                    <span
+                      style="background-color: red"
+                      class="hint--left"
+                      data-hint="رنگ قرمز"
+                    ></span>
+                    <span
+                      style="background-color: #fff"
+                      class="hint--left"
+                      data-hint="رنگ سفید"
+                    ></span>
+                  </div>
+                </div>
+                <a href="">
+                  <div class="image text-center">
+                    <img
+                      src="assets/images/amazing/watch-1.jpg"
+                      class="img-fluid one-image"
+                      alt=""
+                    />
+                    <img
+                      src="assets/images/amazing/watch-2.jpg"
+                      class="img-fluid two-image"
+                      alt=""
+                    />
+                  </div>
+                  <div class="desc">
+                    <div class="title">
+                      <h6 class="title-fa">ساعت هوشمند</h6>
+                      <h6 class="title-en text-muted">Samsung Galaxy Watch</h6>
+                      <div class="progress mt-3">
+                        <div
+                          class="progress-bar"
+                          role="progressbar"
+                          style="width: 50%"
+                          aria-valuenow="50"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        ></div>
+                      </div>
+                      <div class="my-2">
+                        <span class="fw-bold me-1">50%</span>
+                        <span class="text-muted font-12">فروش رفته</span>
+                      </div>
+                    </div>
+                    <div
+                      class="foot d-flex justify-content-between align-items-center"
+                    >
+                      <div
+                        class="d-flex justify-content-center align-items-center"
+                      >
+                        <div
+                          class="add hint--left"
+                          data-hint="افزودن به سبد خرید"
+                        >
+                          <i class="fal fa-shopping-basket"></i>
+                        </div>
+                      </div>
+                      <div class="price flex-column justify-content-end">
+                        <div>
+                          <span class="font-18 fw-bold">200.000</span>
+                        </div>
+                        <div
+                          class="d-flex justify-content-center align-items-center"
+                        >
+                          <span
+                            class="text-muted font-14 text-decoration-line-through"
+                            >400.000</span
+                          >
+                          <span class="text-muted font-14 ms-2">تومان</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="timer text-center">
+                      <div
+                        class="countdown"
+                        data-date="2025-03-07"
+                        data-time="19:30"
+                      ></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/plugin/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/plugin/timer/timer.js"></script>
+    <script src="assets/plugin/hint-css/hint-css.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#searchInput").on("focus", function () {
+          $("#suggestionsContainer").show();
+        });
+
+        $(document).on("click", function (event) {
+          if (
+            !$(event.target).closest("#searchInput, #suggestionsContainer")
+              .length
+          ) {
+            $("#suggestionsContainer").hide();
+          }
+        });
+
+        $("#suggestionsContainer").on("click", function (event) {
+          event.stopPropagation();
+        });
+      });
+    </script>
+  </body>
+</html>

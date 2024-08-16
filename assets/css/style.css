@@ -1,0 +1,238 @@
+﻿/*
+ Version: 1.0
+ Author: Alireza Roshanaie
+ Author URI: https://mihanjs.com/
+*/
+
+/*----------> Fonts Start <---------*/
+@font-face {
+  font-family: "shabnam";
+  font-weight: normal;
+  src: url("../fonts/shabnam/Shabnam-Light-FD.eot") format("eot"),
+    url("../fonts/shabnam/Shabnam-Light-FD.ttf") format("true type"),
+    url("../fonts/shabnam/Shabnam-Light-FD.woff") format("woff"),
+    url("../fonts/shabnam/Shabnam-Light-FD.woff2") format("woff2");
+}
+/*----------> Fonts End <----------*/
+:root {
+  --shadow-box: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  --color: #515151;
+  --main-color: #ef473a;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  direction: rtl;
+  background-color: #c8c8c8;
+  font-family: "shabnam";
+  font-size: 14px;
+  text-align: right;
+  margin-top: 50px;
+  overflow-x: hidden !important;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.amazing {
+  background: var(--main-color) url("../image/patterns.png");
+  box-shadow: var(--shadow-box);
+}
+
+.swiper-slide {
+  width: auto;
+}
+
+.product-box-item {
+  width: 250px;
+  box-shadow: var(--shadow-box);
+  margin: 10px 0;
+  overflow: hidden;
+  border-radius: 10px;
+  z-index: 1;
+  position: relative;
+}
+
+.product-box-item::before {
+  content: "";
+  width: 160px;
+  height: 150px;
+  position: absolute;
+  bottom: -28%;
+  right: -19%;
+  background-color: #ef4056a1;
+  border: 6px solid #e6e4e4;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.product-box-item .hover {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  transition: 0.3s all ease-in-out;
+}
+
+.product-box-item:hover .hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+.product-box-item .hover .hover-btn {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-box-item .hover .hover-btn a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  background: white;
+  color: var(--color);
+  padding: 5px 10px;
+  box-shadow: var(--shadow-box);
+  border-radius: 5px;
+}
+
+.product-box-item .hover .hover-color {
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+.product-box-item .hover .hover-color span {
+  border: 1px solid #aaa;
+  margin-bottom: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.product-box-item .image img {
+  display: block;
+  margin: auto;
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.product-box-item .two-image {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: transform 1.5s, visibility 0.5s, opacity 0.5s;
+}
+
+.product-box-item:hover .one-image {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.product-box-item:hover .two-image {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+  transform: scale(1.15);
+}
+.product-box-item .desc {
+  padding: 10px;
+}
+.product-box-item .desc .title .title-fa {
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 25px;
+  height: 25px;
+  overflow: hidden;
+  font-weight: 700 !important;
+}
+.product-box-item .desc .title .title-en {
+  font-size: 12px;
+  margin-bottom: 10px;
+  height: 25px;
+  overflow: hidden;
+  line-height: 25px;
+}
+.product-box-item .desc .title .progress {
+  height: 3px;
+}
+.product-box-item .foot .add,
+.product-box-item .foot .see-fast {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: var(--shadow-md);
+  color: var(--color);
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  line-height: 30px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  transition: 0.3s all ease-in-out;
+}
+
+.product-box-item .foot .add:hover,
+.product-box-item .foot .see-fast:hover {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  box-shadow: var(--shadow-md);
+  padding: 15px 15px;
+  background: #515151;
+  color: #515151;
+  border-radius: 0;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 16px;
+  color: #fff;
+}
+
+.swiper-button-next::after {
+  position: absolute;
+  left: 40%;
+  transform: translateX(-40%);
+}
+
+.swiper-button-prev::after {
+  position: absolute;
+  right: 40%;
+  transform: translateX(40%);
+}
+
+.swiper-button-prev {
+  right: 0 !important;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  left: 0px !important;
+  right: auto;
+}
